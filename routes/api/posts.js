@@ -209,7 +209,7 @@ router.post(
 );
 
 // @route    DELETE api/posts/comment/:id/:comment_id
-// @desc     Delete comment
+// @desc     Delete a comment
 // @access   Private
 router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
   try {
@@ -220,7 +220,7 @@ router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
       comment => comment.id === req.params.comment_id
     );
 
-    // Make sure comment exists
+    // Make sure the comment exists
     if (!comment) {
       return res.status(404).json({ msg: 'Comment does not exist' });
     }
@@ -228,7 +228,7 @@ router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
     // Check user
     if (comment.user.toString() !== req.user.id) {
       return res.status(401).json({ msg: 'User not authorized' });
-    }
+    }  
 
     // Get remove index
     const removeIndex = post.comments
